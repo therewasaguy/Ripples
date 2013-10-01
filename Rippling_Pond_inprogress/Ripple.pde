@@ -7,36 +7,22 @@ class Ripple {
   float positionX;
   float positionY;
   float maxSize;
+  //decay time
+  float lifespan;
 
-//Ripple constructor
-  /*
-  Ripple(float tempX, float tempY, float tempSize, color tempC) {
-    xpos = tempX;
-    ypos = tempY;
-    size = tempSize;
-    c = tempC;
-    
-  }
-  */
   //New ripple constructor where additionally I am passing in speed and X & Y postions.
-  Ripple(float tempX, float tempY, float tempSize, color tempC, float rspeed,float MouseXValue, float MouseYValue, float tmSize) {
+  Ripple(float tempX, float tempY, float tempSize, color tempC, float rspeed, float tmSize, float fTime) {
     xpos = tempX;
     ypos = tempY;
     size = tempSize;
     c = tempC;
     speed=rspeed;
-    positionX=MouseXValue;
-    positionY=MouseYValue;
     maxSize = tmSize;
+    positionX=xpos;
+    positionY=ypos;
+    lifespan = fTime;
   }
   
-  /*
-  void move(float tspeed) {
-    size = size + tspeed;
-    if (this.getSize() > width) {
-      this.reset(width/2,height/2,tspeed,c);
-    }
-  }*/
   
   //New ripple move without the speed 
   void move() {
@@ -44,6 +30,7 @@ class Ripple {
     if (this.getSize() > maxSize) {
       this.reset(positionX,positionY,speed,c);
     }
+    lifespan -= 1.0;
   }
   
   float getSize() {
@@ -61,9 +48,15 @@ class Ripple {
 
   void display() {
     stroke(2,2);
-    fill(c,100);
+    fill(c,lifespan);
     ellipseMode(CENTER);
     ellipse(xpos,ypos, size, size);
   }
   
+  
+// Is the ripple still alive?
+  boolean isDead() {
+    return (lifespan < 0.0);
+  }
+
 }

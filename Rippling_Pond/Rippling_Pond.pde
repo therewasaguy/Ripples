@@ -1,6 +1,4 @@
-/*Jason's Notes:
-I'll do the main ripple, maybe meet up on Friday, 3-4
-
+/*Jason's to-do Notes:
 fade time - defined in main ripple
 collisions - defined in main ripple
 
